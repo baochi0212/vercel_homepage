@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'motion/react'
-import { XIcon } from 'lucide-react'
 import { Spotlight } from '@/components/ui/spotlight'
 import { Magnetic } from '@/components/ui/magnetic'
 import {
@@ -92,10 +91,7 @@ function MagneticSocialLink({
 export default function Personal() {
   return (
     <div className="relative mx-auto min-h-screen max-w-3xl px-8 pb-16 pt-24 md:pb-32 md:pt-32">
-      <Spotlight
-        className="left-0 top-40 md:-top-80"
-        fill="rgba(255, 255, 255, 0.5)"
-      />
+      <Spotlight className="left-0 top-40 md:-top-80" />
       <motion.section
         className="mb-24"
         initial="hidden"
