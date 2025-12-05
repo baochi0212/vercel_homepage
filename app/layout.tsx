@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import './globals.css'
+import { ThemeProvider } from 'next-themes'
 
 export const metadata: Metadata = {
   title: 'Chi Tran - Machine Learning Engineer',
@@ -11,42 +13,20 @@ export const metadata: Metadata = {
     type: 'website',
   },
 }
-const SKILLS = [
-  'Natural Language Processing',
-  'Multimodal Learning',
-  'Large Language Models',
-  'Edge AI',
-  'Model Compression',
-  'PyTorch',
-  'Hugging Face',
-  'TensorRT-LLM',
-]
 
-// Then in the render:
-<motion.section
-  initial="hidden"
-  animate="visible"
-  variants={VARIANTS_CONTAINER}
->
-  <motion.h2
-    variants={VARIANTS_SECTION}
-    transition={TRANSITION_SECTION}
-    className="mb-8 text-xs font-bold uppercase tracking-widest"
-  >
-    Expertise
-  </motion.h2>
-  <motion.div
-    variants={VARIANTS_SECTION}
-    transition={TRANSITION_SECTION}
-    className="flex flex-wrap gap-2"
-  >
-    {SKILLS.map((skill) => (
-      <span
-        key={skill}
-        className="rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1 text-sm"
-      >
-        {skill}
-      </span>
-    ))}
-  </motion.div>
-</motion.section>
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body className="antialiased">
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  )
+}
+
