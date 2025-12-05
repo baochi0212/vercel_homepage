@@ -2,7 +2,7 @@ type Project = {
   name: string
   description: string
   link: string
-  video: string
+  video?: string
   id: string
 }
 
@@ -29,97 +29,116 @@ type SocialLink = {
 
 export const PROJECTS: Project[] = [
   {
-    name: 'Motion Primitives Pro',
-    description:
-      'Advanced components and templates to craft beautiful websites.',
-    link: 'https://pro.motion-primitives.com/',
-    video:
-      'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/newProfileItem/d898be8a-7037-4c71-af0c-8997239b050d.mp4?_a=DATAdtAAZAA0',
+    name: 'LaVy',
+    description: 'First Vietnamese Multimodal Large Language Model (7B parameters) with model weights, training pipeline, and LaVy-Bench benchmark.',
+    link: 'https://github.com/baochi0212/LaVy',
     id: 'project1',
   },
   {
-    name: 'Motion Primitives',
-    description: 'UI kit to make beautiful, animated interfaces.',
-    link: 'https://motion-primitives.com/',
-    video:
-      'https://res.cloudinary.com/read-cv/video/upload/t_v_b/v1/1/profileItems/W2azTw5BVbMXfj7F53G92hMVIn32/XSfIvT7BUWbPRXhrbLed/ee6871c9-8400-49d2-8be9-e32675eabf7e.mp4?_a=DATAdtAAZAA0',
+    name: 'PhoGPT',
+    description: 'Open-source Vietnamese LLM series (4B-7.5B parameters) achieving state-of-the-art performance on Vietnamese NLP benchmarks.',
+    link: 'https://github.com/VinAIResearch/PhoGPT',
     id: 'project2',
+  },
+  {
+    name: 'MISCA',
+    description: 'State-of-the-art multi-intent detection and slot filling model achieving SOTA accuracy on MixATIS and MixSNIPS benchmarks.',
+    link: 'https://github.com/VinAIResearch/MISCA',
+    id: 'project3',
+  },
+  {
+    name: 'Portrayer',
+    description: 'MLLM optimized for long-form generation (1000+ tokens) in image-text QA scenarios with dynamic context window.',
+    link: 'https://github.com/baochi0212/Portrayer',
+    id: 'project4',
+  },
+  {
+    name: 'VinAI Writer',
+    description: 'Production-grade Vietnamese writing assistant for grammar error correction serving 10,000+ users with 92% accuracy.',
+    link: 'https://www.youtube.com/watch?v=fUkC6dft7ps',
+    id: 'project5',
+  },
+  {
+    name: 'TourxQA',
+    description: 'End-to-end tourism chatbot system utilizing BERT-based models for intent classification (95% accuracy) and extractive QA.',
+    link: 'https://github.com/baochi0212/tourxQA',
+    id: 'project6',
   },
 ]
 
 export const WORK_EXPERIENCE: WorkExperience[] = [
   {
-    company: 'Reglazed Studio',
-    title: 'CEO',
-    start: '2024',
+    company: 'Qualcomm AI Research',
+    title: 'Machine Learning Engineer',
+    start: 'Jan 2025',
     end: 'Present',
-    link: 'https://ibelick.com',
+    link: 'https://www.qualcomm.com/research/artificial-intelligence/ai-research',
     id: 'work1',
   },
   {
-    company: 'Freelance',
-    title: 'Design Engineer',
-    start: '2022',
-    end: '2024',
-    link: 'https://ibelick.com',
+    company: 'VinAI Research',
+    title: 'Research Engineer',
+    start: 'Feb 2023',
+    end: 'Aug 2024',
+    link: 'https://www.vinai.io/',
     id: 'work2',
   },
   {
-    company: 'Freelance',
-    title: 'Front-end Developer',
-    start: '2017',
-    end: 'Present',
-    link: 'https://ibelick.com',
+    company: 'BKAI Research Center',
+    title: 'Research Assistant',
+    start: 'Jun 2022',
+    end: 'Aug 2024',
+    link: 'https://bkai.ai/',
     id: 'work3',
   },
 ]
 
 export const BLOG_POSTS: BlogPost[] = [
   {
-    title: 'Exploring the Intersection of Design, AI, and Design Engineering',
-    description: 'How AI is changing the way we design',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
+    title: 'LaVy: Vietnamese Multimodal Large Language Model',
+    description: 'First Vietnamese MLLM addressing low-resource multimodal challenges. Published in arXiv 2024.',
+    link: 'https://arxiv.org/abs/2404.07922',
     uid: 'blog-1',
   },
   {
-    title: 'Why I left my job to start my own company',
-    description:
-      'A deep dive into my decision to leave my job and start my own company',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
+    title: 'Improved Training Technique for Shortcut Models',
+    description: 'Novel approaches to training shortcut models for efficient inference. Published at NeurIPS 2025.',
+    link: 'https://openreview.net/pdf?id=ovUuNzZZbK',
     uid: 'blog-2',
   },
   {
-    title: 'What I learned from my first year of freelancing',
-    description:
-      'A look back at my first year of freelancing and what I learned',
-    link: '/blog/exploring-the-intersection-of-design-ai-and-design-engineering',
+    title: 'MISCA: A Joint Model for Multiple Intent Detection and Slot Filling',
+    description: 'State-of-the-art on MixATIS & MixSNIPS benchmarks. Published at EMNLP 2023.',
+    link: 'https://aclanthology.org/2023.findings-emnlp.841/',
     uid: 'blog-3',
   },
   {
-    title: 'How to Export Metadata from MDX for Next.js SEO',
-    description: 'A guide on exporting metadata from MDX files to leverage Next.js SEO features.',
-    link: '/blog/example-mdx-metadata',
+    title: 'PhoGPT: Generative Pre-training for Vietnamese',
+    description: 'First open-source Vietnamese LLM with comprehensive training and inference code.',
+    link: 'https://arxiv.org/abs/2311.02945',
     uid: 'blog-4',
+  },
+  {
+    title: 'AccurateRAG: Building Accurate Retrieval-Augmented QA Applications',
+    description: 'Framework for building accurate retrieval-augmented question-answering applications.',
+    link: 'https://arxiv.org/abs/2510.02243',
+    uid: 'blog-5',
   },
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    label: 'Github',
-    link: 'https://github.com/ibelick',
+    label: 'GitHub',
+    link: 'https://github.com/baochi0212',
   },
   {
-    label: 'Twitter',
-    link: 'https://twitter.com/ibelick',
+    label: 'Google Scholar',
+    link: 'https://scholar.google.com/citations?user=D6WZnA0AAAAJ&hl=en',
   },
   {
     label: 'LinkedIn',
-    link: 'https://www.linkedin.com/in/ibelick',
-  },
-  {
-    label: 'Instagram',
-    link: 'https://www.instagram.com/ibelick',
+    link: 'https://www.linkedin.com/in/chi-tran', // Update with your actual LinkedIn URL
   },
 ]
 
-export const EMAIL = 'your@email.com'
+export const EMAIL = 'chitb.work@gmail.com'
