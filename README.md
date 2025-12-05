@@ -4,7 +4,7 @@ Nim is a free and open-source personal website template built with Next.js 15, R
 
 Live demo: [https://nim-fawn.vercel.app](https://nim-fawn.vercel.app)
 
-## Features
+## Features (chitb)
 
 - Minimal one-page portfolio layout.
 - Blog support with MDX.
