@@ -1,63 +1,52 @@
-import type { Metadata, Viewport } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
-import './globals.css'
-import { Header } from './header'
-import { Footer } from './footer'
-import { ThemeProvider } from 'next-themes'
-
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  themeColor: '#ffffff',
-}
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://nim-fawn.vercel.app/'),
-  alternates: {
-    canonical: '/'
+  title: 'Chi Tran - Machine Learning Engineer',
+  description: 'Machine Learning Engineer at Qualcomm AI Research. Specializing in edge AI, multimodal learning, and LLMs. Published at NeurIPS and EMNLP.',
+  openGraph: {
+    title: 'Chi Tran - Machine Learning Engineer',
+    description: 'Machine Learning Engineer specializing in edge AI and multimodal learning',
+    siteName: 'Chi Tran Portfolio',
+    locale: 'en_US',
+    type: 'website',
   },
-  title: {
-    default: 'Nim - Personal website template',
-    template: '%s | Nim'
-  },
-  description:  'Nim is a free and open-source personal website template built with Next.js 15, React 19 and Motion-Primitives.',
-};
-
-const geist = Geist({
-  variable: '--font-geist',
-  subsets: ['latin'],
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-})
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
-  return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geist.variable} ${geistMono.variable} bg-white tracking-tight antialiased dark:bg-zinc-950`}
-      >
-        <ThemeProvider
-          enableSystem={true}
-          attribute="class"
-          storageKey="theme"
-          defaultTheme="system"
-        >
-          <div className="flex min-h-screen w-full flex-col font-[family-name:var(--font-inter-tight)]">
-            <div className="relative mx-auto w-full max-w-screen-sm flex-1 px-4 pt-20">
-              <Header />
-              {children}
-              <Footer />
-            </div>
-          </div>
-        </ThemeProvider>
-      </body>
-    </html>
-  )
 }
+const SKILLS = [
+  'Natural Language Processing',
+  'Multimodal Learning',
+  'Large Language Models',
+  'Edge AI',
+  'Model Compression',
+  'PyTorch',
+  'Hugging Face',
+  'TensorRT-LLM',
+]
+
+// Then in the render:
+<motion.section
+  initial="hidden"
+  animate="visible"
+  variants={VARIANTS_CONTAINER}
+>
+  <motion.h2
+    variants={VARIANTS_SECTION}
+    transition={TRANSITION_SECTION}
+    className="mb-8 text-xs font-bold uppercase tracking-widest"
+  >
+    Expertise
+  </motion.h2>
+  <motion.div
+    variants={VARIANTS_SECTION}
+    transition={TRANSITION_SECTION}
+    className="flex flex-wrap gap-2"
+  >
+    {SKILLS.map((skill) => (
+      <span
+        key={skill}
+        className="rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1 text-sm"
+      >
+        {skill}
+      </span>
+    ))}
+  </motion.div>
+</motion.section>
