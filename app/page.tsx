@@ -19,6 +19,7 @@ import {
   EMAIL,
   SOCIAL_LINKS,
 } from './data'
+import Image from 'next/image'
 
 const VARIANTS_CONTAINER = {
   hidden: { opacity: 0 },
@@ -58,11 +59,11 @@ function ProjectVideo({ src }: ProjectVideoProps) {
   return (
     <video
       src={src}
-      autoPlay
+      className="absolute bottom-0 left-0 size-full rounded-md object-cover"
       loop
+      autoPlay
       muted
       playsInline
-      className="h-full w-full object-cover"
     />
   )
 }
@@ -75,12 +76,10 @@ function MagneticSocialLink({
   link: string
 }) {
   return (
-    <Magnetic intensity={0.2} actionArea="global" range={200}>
+    <Magnetic>
       <Link
         href={link}
-        className="text-sm underline underline-offset-4 hover:text-black dark:hover:text-white"
-        target="_blank"
-        rel="noopener noreferrer"
+        className="rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 dark:border-gray-800 dark:bg-gray-950 dark:text-gray-300 dark:hover:bg-gray-900"
       >
         {children}
       </Link>
@@ -90,256 +89,273 @@ function MagneticSocialLink({
 
 export default function Personal() {
   return (
-    <div className="relative mx-auto min-h-screen max-w-3xl px-8 pb-16 pt-24 md:pb-32 md:pt-32">
-      <Spotlight className="left-0 top-40 md:-top-80" />
-      <motion.section
-        className="mb-24"
-        initial="hidden"
-        animate="visible"
-        variants={VARIANTS_CONTAINER}
-      >
-        <motion.h1
-          className="mb-8 text-4xl font-bold md:text-5xl"
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-        >
-          Chi Tran
-        </motion.h1>
-        <motion.p
-          className="max-w-xl text-sm leading-relaxed md:text-base"
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-        >
-          Machine Learning Engineer at Qualcomm AI Research specializing in edge AI, 
-          multimodal learning, and large language models. Published at NeurIPS 2025 
-          and EMNLP 2023. Creator of the first Vietnamese MLLM (LaVy) and co-author of 
-          PhoGPT. Passionate about building efficient AI systems for real-world applications.
-        </motion.p>
-      </motion.section>
+    <div className="relative flex min-h-screen flex-col">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="https://images.unsplash.com/photo-1451187580459-43490279c0fa"
+          alt="Background"
+          fill
+          className="object-cover opacity-20"
+          priority
+        />
+      </div>
 
-      <motion.section
-        className="mb-24"
+      <Spotlight className="absolute left-0 top-0 z-0 size-full" />
+      <motion.div
+        className="relative z-10 mx-auto flex max-w-3xl flex-col gap-24 p-8 pb-32 pt-32 md:pb-64"
         initial="hidden"
         animate="visible"
         variants={VARIANTS_CONTAINER}
       >
-        <motion.h2
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-          className="mb-8 text-xs font-bold uppercase tracking-widest"
-        >
-          Expertise
-        </motion.h2>
         <motion.div
+          className="flex flex-col gap-6"
           variants={VARIANTS_SECTION}
           transition={TRANSITION_SECTION}
-          className="flex flex-wrap gap-2"
         >
-          {SKILLS.map((skill) => (
-            <span
-              key={skill}
-              className="rounded-full bg-gray-100 dark:bg-gray-800 px-3 py-1 text-sm"
-            >
-              {skill}
-            </span>
-          ))}
+          <h1 className="text-6xl font-bold text-gray-900 dark:text-white">
+            Chi Tran
+          </h1>
+          <p className="text-xl leading-relaxed text-gray-600 dark:text-gray-400">
+            Machine Learning Engineer at Qualcomm AI Research specializing in
+            edge AI, multimodal learning, and large language models. Published
+            at NeurIPS 2025 and EMNLP 2023. Creator of the first Vietnamese
+            MLLM (LaVy) and co-author of PhoGPT. Passionate about building
+            efficient AI systems for real-world applications.
+          </p>
         </motion.div>
-      </motion.section>
 
-      <motion.section
-        className="mb-24"
-        initial="hidden"
-        animate="visible"
-        variants={VARIANTS_CONTAINER}
-      >
-        <motion.h2
+        <motion.div
+          className="flex flex-col gap-6"
           variants={VARIANTS_SECTION}
           transition={TRANSITION_SECTION}
-          className="mb-8 text-xs font-bold uppercase tracking-widest"
         >
-          Selected Projects
-        </motion.h2>
-        <motion.ul
-          className="space-y-4"
-          variants={VARIANTS_CONTAINER}
-          initial="hidden"
-          animate="visible"
-        >
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Expertise
+          </h2>
           <AnimatedBackground
-            defaultValue={PROJECTS[0].id}
-            className="rounded-lg bg-zinc-100 dark:bg-zinc-800"
+            className="rounded-lg bg-gray-100 dark:bg-gray-900"
             transition={{
-              type: 'spring',
-              bounce: 0.2,
-              duration: 0.3,
+              ease: 'easeInOut',
+              duration: 0.2,
             }}
             enableHover
           >
-            {PROJECTS.map((project) => (
-              <motion.li
-                key={project.id}
-                variants={VARIANTS_SECTION}
-                transition={TRANSITION_SECTION}
-                data-id={project.id}
-                className="p-2"
+            {SKILLS.map((skill) => (
+              <div
+                key={skill}
+                data-id={skill}
+                className="cursor-pointer rounded-md px-4 py-2 text-base font-medium text-gray-700 transition-colors dark:text-gray-300"
               >
-                <MorphingDialog
-                  transition={{
-                    type: 'spring',
-                    bounce: 0.05,
-                    duration: 0.25,
-                  }}
-                >
-                  <MorphingDialogTrigger>
-                    <Link
-                      href={project.link}
-                      className="block p-2"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <p className="font-medium">{project.name}</p>
-                      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-                        {project.description}
-                      </p>
-                    </Link>
-                  </MorphingDialogTrigger>
-                  <MorphingDialogContainer>
-                    <MorphingDialogContent
-                      style={{
-                        borderRadius: '12px',
-                      }}
-                      className="relative h-auto w-[500px] border border-zinc-950/10 bg-white dark:border-zinc-50/10 dark:bg-zinc-900"
-                    >
-                      {project.video && (
-                        <ProjectVideo src={project.video} />
-                      )}
-                      <div className="flex flex-col gap-1.5 p-6">
-                        <h3 className="font-semibold">{project.name}</h3>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                          {project.description}
-                        </p>
-                      </div>
-                      <MorphingDialogClose className="text-zinc-950 dark:text-zinc-50" />
-                    </MorphingDialogContent>
-                  </MorphingDialogContainer>
-                </MorphingDialog>
-              </motion.li>
+                {skill}
+              </div>
             ))}
           </AnimatedBackground>
-        </motion.ul>
-      </motion.section>
+        </motion.div>
 
-      <motion.section
-        className="mb-24"
-        initial="hidden"
-        animate="visible"
-        variants={VARIANTS_CONTAINER}
-      >
-        <motion.h2
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-          className="mb-8 text-xs font-bold uppercase tracking-widest"
-        >
-          Work Experience
-        </motion.h2>
-        <motion.ul
-          className="space-y-6"
-          variants={VARIANTS_CONTAINER}
-          initial="hidden"
-          animate="visible"
-        >
-          {WORK_EXPERIENCE.map((job) => (
-            <motion.li
-              key={job.id}
-              variants={VARIANTS_SECTION}
-              transition={TRANSITION_SECTION}
-            >
-              <p className="font-medium">{job.title}</p>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                {job.company}
-              </p>
-              <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                {job.start} - {job.end}
-              </p>
-              <Link
-                href={job.link}
-                className="text-sm underline underline-offset-4"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                View
-              </Link>
-            </motion.li>
-          ))}
-        </motion.ul>
-      </motion.section>
-
-      <motion.section
-        className="mb-24"
-        initial="hidden"
-        animate="visible"
-        variants={VARIANTS_CONTAINER}
-      >
-        <motion.h2
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-          className="mb-8 text-xs font-bold uppercase tracking-widest"
-        >
-          Publications
-        </motion.h2>
-        <motion.ul
-          className="space-y-4"
-          variants={VARIANTS_CONTAINER}
-          initial="hidden"
-          animate="visible"
-        >
-          {BLOG_POSTS.map((post) => (
-            <motion.li
-              key={post.uid}
-              variants={VARIANTS_SECTION}
-              transition={TRANSITION_SECTION}
-            >
-              <Link
-                href={post.link}
-                className="block"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <p className="font-medium">{post.title}</p>
-                <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-                  {post.description}
-                </p>
-              </Link>
-            </motion.li>
-          ))}
-        </motion.ul>
-      </motion.section>
-
-      <motion.section
-        initial="hidden"
-        animate="visible"
-        variants={VARIANTS_CONTAINER}
-      >
-        <motion.h2
-          variants={VARIANTS_SECTION}
-          transition={TRANSITION_SECTION}
-          className="mb-8 text-xs font-bold uppercase tracking-widest"
-        >
-          Connect
-        </motion.h2>
+        {/* Work Experience Section - Moved above Projects */}
         <motion.div
+          className="flex flex-col gap-8"
           variants={VARIANTS_SECTION}
           transition={TRANSITION_SECTION}
-          className="space-y-4"
         >
-          <p className="text-sm">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Work Experience
+          </h2>
+          <div className="grid gap-6">
+            {WORK_EXPERIENCE.map((job) => (
+              <MorphingDialog key={job.id}>
+                <MorphingDialogTrigger>
+                  <div className="group relative flex cursor-pointer flex-col gap-2 rounded-lg border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 dark:border-gray-800 dark:bg-gray-950 dark:hover:border-gray-700">
+                    <div className="flex items-start justify-between">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                          {job.title}
+                        </h3>
+                        <p className="text-lg text-gray-600 dark:text-gray-400">
+                          {job.company}
+                        </p>
+                      </div>
+                      <Image
+                        src={job.image || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d'}
+                        alt={job.company}
+                        width={80}
+                        height={80}
+                        className="rounded-lg object-cover"
+                      />
+                    </div>
+                    <p className="text-base text-gray-500 dark:text-gray-500">
+                      {job.start} - {job.end}
+                    </p>
+                  </div>
+                </MorphingDialogTrigger>
+                <MorphingDialogContainer>
+                  <MorphingDialogContent className="relative flex flex-col gap-6 overflow-hidden bg-white p-8 dark:bg-gray-950">
+                    <div className="flex flex-col gap-4">
+                      <div className="flex items-center gap-4">
+                        <Image
+                          src={job.image || 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d'}
+                          alt={job.company}
+                          width={80}
+                          height={80}
+                          className="rounded-lg object-cover"
+                        />
+                        <div>
+                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                            {job.title}
+                          </h3>
+                          <p className="text-lg text-gray-600 dark:text-gray-400">
+                            {job.company}
+                          </p>
+                          <p className="text-base text-gray-500 dark:text-gray-500">
+                            {job.start} - {job.end}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <Link
+                        href={job.link}
+                        className="inline-flex rounded-md bg-gray-900 px-4 py-2 text-base font-medium text-white transition-colors hover:bg-gray-800 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200"
+                      >
+                        View
+                      </Link>
+                      <MorphingDialogClose className="text-base text-gray-600 dark:text-gray-400" />
+                    </div>
+                  </MorphingDialogContent>
+                </MorphingDialogContainer>
+              </MorphingDialog>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Publications Section - Moved above Projects */}
+        <motion.div
+          className="flex flex-col gap-8"
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Publications
+          </h2>
+          <div className="grid gap-6">
+            {BLOG_POSTS.map((post) => (
+              <Link
+                key={post.uid}
+                href={post.link}
+                className="group relative flex gap-4 rounded-lg border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 dark:border-gray-800 dark:bg-gray-950 dark:hover:border-gray-700"
+              >
+                <Image
+                  src={post.image || 'https://images.unsplash.com/photo-1516116216624-53e697fedbea'}
+                  alt={post.title}
+                  width={120}
+                  height={120}
+                  className="rounded-lg object-cover"
+                />
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                    {post.title}
+                  </h3>
+                  <p className="text-base text-gray-600 dark:text-gray-400">
+                    {post.description}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Selected Projects Section - Moved below Publications */}
+        <motion.div
+          className="flex flex-col gap-8"
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Selected Projects
+          </h2>
+          <div className="grid gap-6">
+            {PROJECTS.map((project) => (
+              <MorphingDialog key={project.id}>
+                <MorphingDialogTrigger>
+                  <div className="group relative flex h-52 cursor-pointer flex-col justify-end overflow-hidden rounded-lg border border-gray-200 bg-white p-6 transition-all hover:border-gray-300 dark:border-gray-800 dark:bg-gray-950 dark:hover:border-gray-700">
+                    <Image
+                      src={project.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c'}
+                      alt={project.name}
+                      fill
+                      className="absolute inset-0 z-0 object-cover opacity-30 transition-opacity group-hover:opacity-40"
+                    />
+                    {project.video && <ProjectVideo src={project.video} />}
+                    <div className="relative z-10">
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                        {project.name}
+                      </h3>
+                      <p className="mt-2 text-base text-gray-600 dark:text-gray-400">
+                        {project.description}
+                      </p>
+                    </div>
+                  </div>
+                </MorphingDialogTrigger>
+                <MorphingDialogContainer>
+                  <MorphingDialogContent className="relative flex h-auto flex-col gap-6 overflow-hidden bg-white p-8 dark:bg-gray-950">
+                    <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+                      <Image
+                        src={project.image || 'https://images.unsplash.com/photo-1555066931-4365d14bab8c'}
+                        alt={project.name}
+                        fill
+                        className="object-cover"
+                      />
+                      {project.video && (
+                        <video
+                          src={project.video}
+                          className="size-full object-cover"
+                          loop
+                          autoPlay
+                          muted
+                          playsInline
+                        />
+                      )}
+                    </div>
+                    <div className="flex flex-col gap-4">
+                      <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
+                        {project.name}
+                      </h3>
+                      <p className="text-lg text-gray-600 dark:text-gray-400">
+                        {project.description}
+                      </p>
+                    </div>
+                    <div className="flex gap-2">
+                      <Link
+                        href={project.link}
+                        className="inline-flex rounded-md bg-gray-900 px-4 py-2 text-base font-medium text-white transition-colors hover:bg-gray-800 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-200"
+                      >
+                        View Project
+                      </Link>
+                      <MorphingDialogClose className="text-base text-gray-600 dark:text-gray-400" />
+                    </div>
+                  </MorphingDialogContent>
+                </MorphingDialogContainer>
+              </MorphingDialog>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="flex flex-col gap-6"
+          variants={VARIANTS_SECTION}
+          transition={TRANSITION_SECTION}
+        >
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Connect
+          </h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400">
             Feel free to contact me at{' '}
-            <Link
+            <a
               href={`mailto:${EMAIL}`}
-              className="underline underline-offset-4"
+              className="text-gray-900 underline dark:text-white"
             >
               {EMAIL}
-            </Link>
+            </a>
           </p>
           <div className="flex flex-wrap gap-4">
             {SOCIAL_LINKS.map((link) => (
@@ -349,7 +365,7 @@ export default function Personal() {
             ))}
           </div>
         </motion.div>
-      </motion.section>
+      </motion.div>
     </div>
   )
 }
